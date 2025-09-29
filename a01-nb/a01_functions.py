@@ -57,22 +57,24 @@ def nb_train(X, y, alpha=1, K=None, C=None):
     # Compute class priors and store them in priors
     priors = np.zeros(C)
     # YOUR CODE HERE
+    class_counts = np.bincount(y, minlength=C)
+    priors = (class_counts + alpha - 1) / (N + C * (alpha - 1))
 
     # Compute class-conditional densities in a class x feature x value array
     # and store them in cls.
     cls = np.zeros((C, D, K))
     # YOUR CODE HERE
-
     for c in range(C):
-        Xc = X[y == c]  # select all samples of class c
+        Xc = X[y == c]
+        Nc = Xc.shape[0]
         for j in range(D):
-            feature_counts = np.bincount(Xc[:, j], minlength=K)
-            # MAP estimate with Dirichlet prior
-            cls[c, j, :] = (feature_counts + alpha - 1) / (len(Xc) + K * (alpha - 1))
-    
+            # if Nc == 0, feature_counts -> zeros; denom = K*(alpha-1)
+            feature_counts = np.bincount(Xc[:, j], minlength=K) if Nc > 0 else np.zeros(K, dtype=int)
+            denom = Nc + K * (alpha - 1)
+            cls[c, j, :] = (feature_counts + alpha - 1) / denom
+
     # Output result
     return dict(logpriors=np.log(priors), logcls=np.log(cls))
-
 
 # %%
 def nb_predict(model, Xnew):
