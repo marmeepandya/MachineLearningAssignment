@@ -161,11 +161,8 @@ def nb_generate(model, ygen):
         # Generate the i-th example of class c, i.e., row Xgen[i,:]. To sample
         # from a categorical distribution with parameter theta (a probability
         # vector), you can use np.random.choice(range(K),p=theta).
-        # YOUR CODE HERE
-    for j in range(D):
-            theta = np.exp(logcls[c, j, :])
-            # Numerical safety: normalize (should already sum to 1, but do it explicitly)
-            theta = theta / theta.sum()
-            Xgen[i, j] = np.random.choice(np.arange(K), p=theta)
+        for j in range(D):
+            theta = np.exp(logcls[c, j, :])  # class-conditional probabilities for feature j
+            Xgen[i, j] = np.random.choice(range(K), p=theta)
 
     return Xgen
