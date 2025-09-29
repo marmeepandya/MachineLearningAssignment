@@ -107,9 +107,29 @@ def nb_predict(model, Xnew):
     logjoint = np.zeros((Nnew, C))
     # YOUR CODE HERE
 
+    # start with class log-priors broadcasted to shape (Nnew, C)
+    logjoint = np.tile(logpriors[None, :], (Nnew, 1))  # (Nnew, C)
+
+    # add up per-feature conditional log-probabilities
+    for j in range(D):
+        vals = Xnew[:, j]                  # shape (Nnew,)
+        # logcls[:, j, vals] -> shape (C, Nnew); transpose to (Nnew, C)
+        logjoint += logcls[:, j, vals].T
+
+
     # Compute predicted labels (in "yhat") and their log probabilities
     # P(yhat_i | x_i) (in "logprob")
     # YOUR CODE HERE
+
+    # predicted labels: class with highest unnormalized log-joint per example
+    yhat = np.argmax(logjoint, axis=1).astype(int)  # shape (Nnew,)
+
+    # compute normalizer log p(x_i) = logsumexp_c logjoint[i,c]
+    # our helper computes logsumexp over columns, so pass transpose (C, Nnew)
+    lse = logsumexp(logjoint.T)  # shape (Nnew,)
+
+    # log-probability of the predicted label: log p(yhat | x) = log p(yhat,x) - log p(x)
+    logprob = logjoint[np.arange(Nnew), yhat] - lse  # shape (Nnew,)
 
     return dict(yhat=yhat, logprob=logprob)
 
@@ -142,5 +162,10 @@ def nb_generate(model, ygen):
         # from a categorical distribution with parameter theta (a probability
         # vector), you can use np.random.choice(range(K),p=theta).
         # YOUR CODE HERE
+    for j in range(D):
+            theta = np.exp(logcls[c, j, :])
+            # Numerical safety: normalize (should already sum to 1, but do it explicitly)
+            theta = theta / theta.sum()
+            Xgen[i, j] = np.random.choice(np.arange(K), p=theta)
 
     return Xgen
