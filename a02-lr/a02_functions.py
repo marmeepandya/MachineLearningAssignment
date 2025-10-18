@@ -19,8 +19,13 @@ def normalize_data(X, Xtest):
     Keyword arguments: 
     X, Xtest : two 2D ndarrays
     """
-    # YOUR CODE HERE
-    pass
+    mu_estimate = np.mean(X, axis=0)
+    sigma_estimate = np.std(X, axis=0)
+
+    X_normalized = (X - mu_estimate)/sigma_estimate
+    Xtest_normalized = (Xtest - mu_estimate)/sigma_estimate
+    
+    return X_normalized, Xtest_normalized
 
 # %%
 # you don't need to modify this function
@@ -42,15 +47,15 @@ def logsumexp(x):
 # Define the logistic function. Make sure it operates on both scalars
 # and vectors.
 def sigma(x):
-    # YOUR CODE HERE
-    pass
+    
+    return 1 / (1 + np.exp(-x))
 
 # %%
 # Define the logarithm of the logistic function. Make sure it operates on both
 # scalars and vectors. Perhaps helpful: isinstance(x, np.ndarray).
 def logsigma(x):
     # YOUR CODE HERE
-    pass
+    return np.log(sigma(x))
 
 
 # %%
@@ -66,7 +71,8 @@ def l(y, X, w):
     w : ndarray of shape (D,)
         Weight vector.
     """
-    # YOUR CODE HERE
+    
+
     pass
 
 
