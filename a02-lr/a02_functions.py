@@ -54,10 +54,7 @@ def sigma(x):
 # Define the logarithm of the logistic function. Make sure it operates on both
 # scalars and vectors. Perhaps helpful: isinstance(x, np.ndarray).
 def logsigma(x):
-    # YOUR CODE HERE
     return np.log(sigma(x))
-
-
 # %%
 def l(y, X, w):
     """Log-likelihood of the logistic regression model.
@@ -71,9 +68,9 @@ def l(y, X, w):
     w : ndarray of shape (D,)
         Weight vector.
     """
-    
-
-    pass
+    eta = X @ w
+    log_likelihood = y.T @ logsigma(eta) + (1 - y).T @ logsigma(-eta)
+    return log_likelihood
 
 
 # %%
@@ -93,8 +90,9 @@ def dl(y, X, w):
     -------
     ndarray of shape (D,)
     """
-    # YOUR CODE HERE
-    pass
+    error = y - sigma(X @ w)
+    gradient = (X.T @ error)
+    return gradient 
 
 
 # %%
@@ -102,13 +100,15 @@ def dl(y, X, w):
 # fitting an MLE estimate of logistic regression with gradient descent (should
 # return a tuple of two functions; see optimize)
 def gd(y, X):
+    print(X.shape)
     def objective(w):
-        # YOUR CODE HERE
-        pass
+        return -l(y, X, w)
 
     def update(w, eps):
-        # YOUR CODE HERE
-        pass
+        gradient = dl(y, X, w)
+        N = X.shape[0]
+        print(N)
+        return w + eps * gradient
 
     return (objective, update)
 
@@ -119,7 +119,12 @@ def sgdepoch(y, X, w, eps):
     # Run N stochastic gradient steps (without replacement). Do not rescale each
     # step by factor N (i.e., proceed differently than in the lecture slides).
     # YOUR CODE HERE
-    pass
+    for i in np.random.permutation(len(y)):
+        xi = X[i, :].reshape(1, -1)  # make sure xi is a 2D row vector
+        yi = y[i]
+        gradient = dl(yi, xi, w)
+        w = w + eps * gradient
+    return w
 
 
 # %%
@@ -129,7 +134,7 @@ def sgdepoch(y, X, w, eps):
 def sgd(y, X):
     def objective(w):
         # YOUR CODE HERE
-        pass
+        return -l(y, X, w)
 
     def update(w, eps):
         return sgdepoch(y, X, w, eps)
@@ -141,15 +146,13 @@ def sgd(y, X):
 def predict(Xtest, w):
     """Returns vector of predicted confidence values for logistic regression with
     weight vector w."""
-    # YOUR CODE HERE
-    pass
+    return sigma(Xtest @ w)
 
 
 def classify(Xtest, w):
     """Returns 0/1 vector of predicted class labels for logistic regression with
     weight vector w."""
-    # YOUR CODE HERE
-    pass
+    return (predict(Xtest, w) >= 0.5).astype(int)
 
 
 # %%
