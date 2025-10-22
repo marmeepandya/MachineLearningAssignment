@@ -160,7 +160,7 @@ def l_l2(y, X, w, lambda_):
     """Log-density of posterior of logistic regression with weights w and L2
     regularization parameter lambda_"""
     # YOUR CODE HERE
-    pass
+    return l(y, X, w) - 0.5 * lambda_ * np.dot(w, w)
 
 
 # %%
@@ -168,13 +168,21 @@ def dl_l2(y, X, w, lambda_):
     """Gradient of log-density of posterior of logistic regression with weights w
     and L2 regularization parameter lambda_."""
     # YOUR CODE HERE
-    pass
+    return dl(y, X, w) - lambda_ * w
 
 
 # %%
 def gd_l2(y, X, lambda_):
-    # YOUR CODE HERE
-    pass
+    """Return (objective, update) tuple for MAP logistic regression with L2 regularization."""
+    def objective(w):
+        # negative log-posterior to minimize
+        return -l_l2(y, X, w, lambda_)
+
+    def update(w, eps):
+        # gradient ascent step on log-posterior (minimizing -l_l2)
+        return w + eps * dl_l2(y, X, w, lambda_)
+
+    return (objective, update)
 
 
 # %%
