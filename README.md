@@ -34,6 +34,15 @@ This assignment involves logistic regression, using both MLE and MAP estimation 
 - Exploring the effects of regularization on feature importance and model interpretability.  
 - Comparing gradient descent and stochastic gradient descent approaches for optimization.  
 
+**Instructor Remark:**  
+- Task 1: PASS, Very short, figures too small
+- Task 2: GOOD, A + e) GOOD
+- C – d) GOOD
+- Task 3: PASS, no evidence given in this part of the report, also quite short
+- Task 4: GOOD,
+- Task 5: optional,
+- **Overall Comment:** a few typos, mistake in AI declaration: a01.ipynb does not exist.
+- **Final Grade:** GOOD
 ---
 
 ## 🧩 Repository Structure
