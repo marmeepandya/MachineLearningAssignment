@@ -36,8 +36,7 @@ This assignment involves logistic regression, using both MLE and MAP estimation 
 
 **Instructor Remark:**  
 - Task 1: PASS, Very short, figures too small
-- Task 2: GOOD, A + e) GOOD
-- C – d) GOOD
+- Task 2: GOOD, A + e) GOOD ; C – d) GOOD
 - Task 3: PASS, no evidence given in this part of the report, also quite short
 - Task 4: GOOD,
 - Task 5: optional,
