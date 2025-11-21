@@ -89,6 +89,36 @@ gmm_e(toy_gmm["X"][:3,], dummy_model, return_P=True)
 # Now, implement the M step of fitting a GMM with MLE by completing gmm_e in a04_functions.py.
 
 # %%
+toy_gmm["X"][:3,].shape
+
+# %%
+np.array([[0.1, 0.2, 0.7], [0.3, 0.4, 0.3], [0.0, 1.0, 0.0]]).shape
+
+
+# %%
+def gmm_m(X, W):
+    """Perform the M step of EM for a GMM (MLE estimate).
+
+    `W` is the NxK cluster membership matrix computed in the E step. Returns a new model
+    (dictionary with keys `mu`, `Sigma`, and `pi` defined as in `gmm_gen`).
+
+    """
+    N, D = X.shape
+    K = W.shape[1]
+    pi = np.sum(W, axis=0) / N
+    normalization = np.sum(W, axis=0, keepdims=True)
+    
+    mu = W @ X / normalization.T
+    
+    X_centralized = X - mu
+    outer_products = X_centralized[:, :, None] * X_centralized[:, None, :]
+    print(outer_products.shape, W.T.shape)
+    Sigma = np.einsum('nk,nij->kij', W, outer_products)  / normalization.T[:, np.newaxis, np.newaxis]
+
+    return dict(mu=mu, Sigma=Sigma, pi=pi)
+
+
+# %%
 # Test your solution. This should produce:
 # {'mu': [array([ 6.70641574, -0.47971125]),
 #   array([8.2353509 , 2.52134815]),
@@ -107,44 +137,12 @@ gmm_m(toy_gmm["X"][:3,], np.array([[0.1, 0.2, 0.7], [0.3, 0.4, 0.3], [0.0, 1.0, 
 # ## 2d+2e) Experiment with GMMs for the toy data
 
 # %%
+
+# %%
 # Fit on toy data and color each point by most likely component. Also try fitting with 4
 # or 6 components.
-n_components = 4
-toy_gmm_fit = gmm_fit(toy_gmm["X"], n_components)
-
-mu = toy_gmm_fit['mu']
-Sigma = toy_gmm_fit['Sigma']
-pi = toy_gmm_fit['pi']
-
-W = gmm_e(toy_gmm["X"], toy_gmm_fit)
-cluster_labels = np.argmax(W, axis=1)
-
-fig, axes = plt.subplots(1, 2, figsize=(10, 6))
-
-axes[0].set_title('GMM')
-axes[0].scatter(toy_gmm["X"][:, 0],
-                toy_gmm["X"][:, 1],
-                c=cluster_labels,
-                s=8, alpha=0.1)
-# Kmeans
-kmeans = KMeans(n_components).fit(toy_gmm["X"])
-axes[1].set_title('K-Means')
-axes[1].scatter(toy_gmm["X"][:, 0],
-                toy_gmm["X"][:, 1],
-                c=kmeans.labels_,
-                s=8, alpha=0.1)
-
-
-plt.show()
-plt.savefig(f'images/{n_components}_components_plot_v1.png')
-
-# %%
-
-# %%
-toy_gmm_fit
-
-# %%
-toy_gmm['X'].shape
+toy_gmm_fit = gmm_fit(toy_gmm["X"], 5)
+# YOUR CODE HERE
 
 # %% [markdown]
 # ## 2f) Discover the Secret (optional)
