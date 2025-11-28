@@ -13,6 +13,11 @@
 #     name: python3
 # ---
 
+# %% [markdown]
+# Notebook of <br> 
+# - Marmee Pandya (mpandya) <br>
+# - Jonas Ortner (joortner)
+
 # %%
 import numpy as np
 import matplotlib.pyplot as plt
@@ -152,8 +157,4 @@ toy_gmm['X'].shape
 # %%
 # Load the secret data.
 X = np.loadtxt("data/secret_gmm.csv", delimiter=",")
-
-
-# %%
-# How many components are hidden in this data?
 
