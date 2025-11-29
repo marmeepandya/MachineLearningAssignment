@@ -44,10 +44,34 @@ This assignment involves logistic regression, using both MLE and MAP estimation 
 - **Final Grade:** GOOD
 ---
 
-## 🧩 Repository Structure
-- Assignment 1/ → Naive Bayes Classifier
-- Assignment 2/ → Logistic Regression
+### 3rd Assignment: Singular Value Decomposition (SVD)
+This assignment focuses on applying Singular Value Decomposition for dimensionality reduction and data reconstruction. The main work includes:
 
+- Implementing SVD and validating its correctness.
+- Reducing high-dimensional datasets to lower dimensions.
+- Analyzing reconstruction errors and understanding how the number of components affects performance.
+- Interpreting singular values and singular vectors in the context of dataset structure.
+  
+**Instructor Remark:**  
+- 1: PASS
+  - 1a: GOOD
+  - 1b: PASS, a bit short
+  - 1c: PASS, a bit short
+  - 1d: GOOD
+
+- 2: GOOD
+  - 2a: GOOD, but no actual evidence in report
+  - 2b: GOOD!
+  - 2c: GOOD
+  - 2d: PASS, connection to interpretation of U1, U2 weak
+  - 2e: PASS, method mistake
+  - 2f: GOOD
+
+- 3: FAIL
+  - 3a: FAIL, factual mistakes in discussion
+  - 3b: FAIL: factual mistakes in discussion
+  - 3c: PASS: conclusion from observations missing
+- **Final Grade:** PASS
 ---
 
 ## Author
@@ -56,5 +80,5 @@ M.Sc. Data Science, University of Mannheim
 [GitHub Profile](https://github.com/marmeepandya)
 
 **Jonas**  
-University of Mannheim  
+M.Sc. Data Science, University of Mannheim  
 [GitHub Profile](https://github.com/JonasRub)
