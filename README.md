@@ -74,6 +74,19 @@ This assignment focuses on applying Singular Value Decomposition for dimensional
 - **Final Grade:** PASS
 ---
 
+### 4th Assignment: Latent Variable Models (LVM)
+This assignment covers two major latent variable models: Probabilistic PCA (PPCA) and Gaussian Mixture Models (GMM). Key work includes:
+
+- Probabilistic PCA:
+  - Generating datasets with different noise levels and visualizing their structure.
+  - Implementing MLE for PPCA and analyzing the effect of noise.
+  - Estimating the number of latent components using scree plots and validation data.
+- Gaussian Mixture Models:
+  - Generating toy datasets and performing K-Means as a baseline.
+  - Implementing the EM algorithm to fit GMMs.
+
+---
+
 ## Author
 **Marmee Pandya**  
 M.Sc. Data Science, University of Mannheim  
