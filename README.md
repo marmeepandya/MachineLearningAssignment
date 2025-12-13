@@ -99,7 +99,7 @@ This assignment covers two major latent variable models: Probabilistic PCA (PPCA
   - 2d:PASS, superficial
   - 2e:PASS, question only partially answered
   - 2f:/
-**Final Grade:**:PASS
+- **Final Grade:**:PASS
 
 ---
 
