@@ -85,6 +85,22 @@ This assignment covers two major latent variable models: Probabilistic PCA (PPCA
   - Generating toy datasets and performing K-Means as a baseline.
   - Implementing the EM algorithm to fit GMMs.
 
+**Instructor Remark:**  
+- Task1: FAIL
+  - 1a:not attended to
+  - 1b:same
+  - 1c:same
+  - 1d:same
+
+- Task2: PASS
+  - 2a:FAIL: no description
+  - 2b:FAIL: wrong statements
+  - 2c:PASS
+  - 2d:PASS, superficial
+  - 2e:PASS, question only partially answered
+  - 2f:/
+**Final Grade:**:PASS
+
 ---
 
 ## Author
